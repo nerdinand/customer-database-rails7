@@ -1,0 +1,25 @@
+<%= render partial: 'form_errors', locals: { model: @product } %>
+
+<%= form_for @product, multipart: true do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </p>
+
+  <p>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </p>
+
+  <p>
+    <%= form.label :price_cents %>
+    <%= form.text_field :price_cents %>
+  </p>
+
+  <%= form.submit %>
+<% end %>

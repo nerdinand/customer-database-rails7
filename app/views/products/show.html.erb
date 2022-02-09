@@ -1,0 +1,21 @@
+<h1><%= @product.name %></h1>
+
+<% if @product.image.present? %>
+  <%= image_tag url_for(@product.image) %>
+<% end %>
+
+<p>
+  <%= @product.description %>
+</p>
+
+<p>
+  <%= formatted_price_with_currency(@product.price_cents) %>
+</p>
+
+
+<strong>Customers who bought this product:</strong>
+<ul>
+  <% @product.customers.uniq.each do |customer| %>
+    <li><%= link_to customer.name, customer %></li>
+  <% end %>
+</ul>

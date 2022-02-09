@@ -1,0 +1,30 @@
+<h1><%= @customer.name %></h1>
+
+<h2>Orders</h2>
+<table>
+  <thead>
+    <th>Order #</th>
+    <th>Amount</th>
+    <th>Placed at</th>
+    <th>Paid at</th>
+    <th>Delivered at</th>
+  </thead>
+  <tbody>
+    <% @customer.orders.each do |order| %>
+      <tr>
+        <td><%= link_to order.id, customer_order_path(@customer, order) %></td>
+        <td><%= formatted_price_with_currency(order.price_cents) %></td>
+        <td><%= format_timestamp(order.placed_at) %></td>
+        <td><%= format_timestamp(order.paid_at) %></td>
+        <td><%= format_timestamp(order.delivered_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<address>
+  <%= @customer.name %><br>
+  <%= @customer.address %><br>
+  <%= @customer.zip_code %> <%= @customer.city %><br>
+  Phone: <%= @customer.phone_number %>
+</address>

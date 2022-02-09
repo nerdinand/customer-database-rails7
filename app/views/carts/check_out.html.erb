@@ -1,0 +1,18 @@
+<h1>Check out</h1>
+
+<% if @cart.products.any? %>
+  <ul>
+    <% @cart.products.each do |product| %>
+      <li>
+        <%= product.name %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No products in cart.</p>
+<% end %>
+
+<%= form_for @cart, url: check_out_cart_path, method: :post do |form| %>
+  <%= form.collection_select :customer_id, Customer.all, :id, :name %>
+  <%= form.submit 'Submit order' %>
+<% end %>

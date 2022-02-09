@@ -1,0 +1,22 @@
+<h1>Customers</h1>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= link_to customer.name, customer %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+        <td><%= link_to 'Delete', customer, data: {confirm: 'Are you sure?'}, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New customer', new_customer_path %>

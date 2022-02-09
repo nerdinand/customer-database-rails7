@@ -2,15 +2,32 @@
 <html>
   <head>
     <title>CustomerDatabase</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="navigation">
+      <ul>
+        <li><%= link_to 'Customers', customers_path %></li>
+        <li><%= link_to 'Orders', orders_path %></li>
+        <li><%= link_to 'Products', products_path %></li>
+      </ul>
+    </div>
+
+
+    <div class="content">
+      <% if flash[:notice] %>
+        <div class="flash flash-notice"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="flash flash-alert"><%= flash[:alert] %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,36 @@
+<h1>Orders</h1>
+
+<p>
+  <%= link_to 'Show all orders', {} %>
+</p>
+
+<p>
+  <%= link_to 'Show paid orders', paid: true %>
+</p>
+
+<p>
+  <%= link_to 'Show delivered orders', delivered: true %>
+</p>
+
+<table>
+  <thead>
+    <th>Order #</th>
+    <th>Amount</th>
+    <th>Customer</th>
+    <th>Placed at</th>
+    <th>Paid at</th>
+    <th>Delivered at</th>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= link_to order.id, customer_order_path(order.customer, order) %></td>
+        <td><%= formatted_price_with_currency(order.price_cents) %></td>
+        <td><%= link_to order.customer.name, order.customer %></td>
+        <td><%= format_timestamp(order.placed_at) %></td>
+        <td><%= format_timestamp(order.paid_at) %></td>
+        <td><%= format_timestamp(order.delivered_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

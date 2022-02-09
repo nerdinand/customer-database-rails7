@@ -1,0 +1,29 @@
+<h1>Shopping cart</h1>
+
+<% if @cart.products.any? %>
+  <table>
+    <thead>
+      <th>Product</th>
+      <th>Amount</th>
+      <th></th>
+    </thead>
+    <tbody>
+    <% @cart.products.each.with_index do |product, index| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= @cart.amounts[index] %></td>
+        <td>
+          <%= form_for @cart, url: line_item_cart_path, method: :delete do |form| %>
+            <%= form.hidden_field :index, value: index %>
+            <%= form.submit 'Delete' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No products in cart.</p>
+<% end %>
+
+<%= link_to 'Check out', check_out_cart_path %>

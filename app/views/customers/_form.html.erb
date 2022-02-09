@@ -1,0 +1,30 @@
+<%= render partial: 'form_errors', locals: { model: @customer } %>
+
+<%= form_for @customer do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </p>
+
+  <p>
+    <%= form.label :zip_code %>
+    <%= form.text_field :zip_code %>
+  </p>
+
+  <p>
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </p>
+
+  <p>
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number %>
+  </p>
+
+  <%= form.submit %>
+<% end %>

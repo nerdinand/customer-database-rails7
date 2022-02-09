@@ -1,0 +1,55 @@
+<h1>Order #<%= @order.id %></h1>
+
+<p>
+  Customer: <%= link_to @order.customer.name, @order.customer %>
+</p>
+
+<table>
+  <thead>
+    <th>Product</th>
+    <th>Amount</th>
+    <th>Price</th>
+  </thead>
+  <tbody>
+    <% @order.line_items.each do |line_item| %>
+      <tr>
+        <td><%= link_to line_item.product.name, line_item.product %></td>
+        <td><%= line_item.amount %></td>
+        <td><%= formatted_price_with_currency(line_item.price_cents) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td><%= formatted_price_with_currency(@order.price_cents) %></td>
+    </tr>
+  </tfoot>
+</table>
+
+<h2>Order placed</h2>
+<p><%= format_timestamp(@order.placed_at) %></p>
+
+<h2>Order paid</h2>
+<% if @order.paid? %>
+  <p><%= format_timestamp(@order.paid_at) %></p>
+<% else %>
+  Order not paid yet.
+  <p>
+    <%= button_to 'Paid', customer_order_paid_path(@order.customer, @order), method: :patch %>
+  </p>
+<% end %>
+
+<h2>Order delivered</h2>
+<% if @order.delivered? %>
+  <p><%= format_timestamp(@order.delivered_at) %></p>
+<% else %>
+  Order not delivered yet.
+  <% if @order.paid? %>
+    <p>
+      <%= button_to 'Delivered', customer_order_delivered_path(@order.customer, @order), method: :patch %>
+    </p>
+  <% end %>
+<% end %>
+
