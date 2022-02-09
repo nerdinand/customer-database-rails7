@@ -12,11 +12,18 @@
 
   <body>
     <div class="navigation">
-      <ul>
-        <li><%= link_to 'Customers', customers_path %></li>
-        <li><%= link_to 'Orders', orders_path %></li>
-        <li><%= link_to 'Products', products_path %></li>
-      </ul>
+      <%= link_to customers_path do %>
+        <span class="oi" data-glyph="people"></span>
+        Customers
+      <% end %>
+      <%= link_to orders_path do %>
+        <span class="oi" data-glyph="document"></span>
+        Orders
+      <% end %>
+      <%= link_to products_path do %>
+        <span class="oi" data-glyph="box"></span>
+        Products
+      <% end %>
     </div>
 
 

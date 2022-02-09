@@ -1,8 +1,16 @@
 <p>
-  <%= @cart.products.count %> products in <%= link_to 'cart', cart_path %>.
+  <%= @cart.products.count %> products in
+  <%= link_to cart_path do %>
+    <span class="oi" data-glyph="cart"></span>
+    cart
+  <% end %>
+  .
 </p>
 
-<h1>Products</h1>
+<h1>
+  <span class="oi" data-glyph="box"></span>
+  Products
+</h1>
 
 <table>
   <thead>
@@ -28,10 +36,16 @@
             <%= form.submit 'Add to cart' %>
           <% end %>
         </td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td>
+          <%= link_to edit_product_path(product) do %>
+            <span class="oi" data-glyph="pencil"></span>
+            Edit
+          <% end %>
+        </td>
         <td>
           <%= form_with model: product, data: {'turbo-confirm': "Are you sure?"}, method: :delete do |f| %>
             <div class='submit' onclick="event.target.parentElement.requestSubmit()">
+              <span class="oi" data-glyph="circle-x"></span>
               Delete
             </div>
           <% end %>
@@ -43,4 +57,7 @@
 
 <br>
 
-<%= link_to 'New product', new_product_path %>
+<%= link_to new_product_path do %>
+  <span class="oi" data-glyph="plus"></span>
+  New product
+<% end %>

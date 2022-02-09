@@ -1,16 +1,30 @@
-<h1>Orders</h1>
+<h1>
+  <span class="oi" data-glyph="document"></span>
+  Orders
+</h1>
 
-<p>
-  <%= link_to 'Show all orders', {} %>
-</p>
+<div class="order-filters">
+  <div class="<%= order_filters_active_class(:all) %>">
+    <%= link_to({}) do %>
+      <span class="oi" data-glyph="infinity"></span>
+      Show all orders
+    <% end %>
+  </div>
 
-<p>
-  <%= link_to 'Show paid orders', paid: true %>
-</p>
+  <div class="<%= order_filters_active_class(:paid) %>">
+    <%= link_to paid: true do %>
+      <span class="oi" data-glyph="dollar"></span>
+      Show paid orders
+    <% end %>
+  </div>
 
-<p>
-  <%= link_to 'Show delivered orders', delivered: true %>
-</p>
+  <div class="<%= order_filters_active_class(:delivered) %>">
+    <%= link_to delivered: true do %>
+      <span class="oi" data-glyph="check"></span>
+      Show delivered orders
+    <% end %>
+  </div>
+</div>
 
 <table>
   <thead>
