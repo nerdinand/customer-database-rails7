@@ -1,24 +1,16 @@
-# README
+# Rails 7 sample project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Rails 7 sample project for educational purposes.
 
-Things you may want to cover:
+It is a simple project dealing with customers, products, orders and line items.
 
-* Ruby version
+_TODO_: Link to deployment
 
-* System dependencies
+## Setup
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Download or clone this repository
+2. Run `bundle install --without production` in project directory
+3. Run `rails db:migrate` in project directory
+4. Run `rails runner db/populate_with_fake_data.rb` to generate some fake data to work with. This can take a while because product pictures are being downloaded.
+5. Run `rails server` in project directory
+6. Visit `http://localhost:3000`
