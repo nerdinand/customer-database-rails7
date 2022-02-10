@@ -57,7 +57,8 @@ class CustomersController < ApplicationController
       :address,
       :zip_code,
       :city,
-      :phone_number
+      :phone_number,
+      :email
     )
   end
 end

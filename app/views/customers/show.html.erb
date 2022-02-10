@@ -26,5 +26,6 @@
   <%= @customer.name %><br>
   <%= @customer.address %><br>
   <%= @customer.zip_code %> <%= @customer.city %><br>
-  Phone: <%= @customer.phone_number %>
+  Phone: <%= @customer.phone_number %><br>
+  Email: <%= mail_to @customer.email %>
 </address>
