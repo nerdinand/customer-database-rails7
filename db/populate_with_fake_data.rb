@@ -1,6 +1,6 @@
 require 'faker'
 require 'net/http'
-require 'tempfile'
+require 'stringio'
 
 Faker::Config.locale = 'de-CH'
 
@@ -8,14 +8,10 @@ def download_lorem_flickr
   http = Net::HTTP.new('loremflickr.com', 443)
   http.use_ssl = true
   
-  loremflickr_uri = URI(Faker::LoremFlickr.image(size: '300x300', search_terms: ['products'])).path
+  loremflickr_uri = URI(Faker::LoremFlickr.image(size: '300x300', search_terms: ['car'])).path
   image_uri = http.get(loremflickr_uri)['location']
   response = http.get(image_uri)
-
-  file = Tempfile.new(['image', '.jpg'], encoding: 'ascii-8bit')
-  file.write(response.body)
-  file.rewind
-  file
+  StringIO.new(response.body)
 end
 
 ActiveRecord::Base.connection.transaction do
@@ -30,19 +26,15 @@ ActiveRecord::Base.connection.transaction do
   end
 
   20.times do
-    product_image_file = download_lorem_flickr
+    product_image_data = download_lorem_flickr
 
-    begin
-      product = Product.create!(
-        name: Faker::Lorem.words(number: 2, supplemental: true).join(' '),
-        description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: true, random_sentences_to_add: 2),
-        price_cents: Faker::Number.between(from: 10_00, to: 10000_00)
-      )
-      product.image.attach(io: product_image_file, filename: 'image.jpg')
-      product.save!
-    ensure
-      product_image_file.unlink
-    end
+    product = Product.create!(
+      name: Faker::Lorem.words(number: 2, supplemental: true).join(' '),
+      description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: true, random_sentences_to_add: 2),
+      price_cents: Faker::Number.between(from: 10_00, to: 10000_00)
+    )
+    product.image.attach(io: product_image_data, filename: 'image.jpg')
+    product.save!
   end
 
   Customer.all.each do |customer|
