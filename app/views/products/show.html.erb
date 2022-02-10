@@ -19,3 +19,10 @@
     <li><%= link_to customer.name, customer %></li>
   <% end %>
 </ul>
+
+<%= link_to 'Edit', edit_product_path(@product) %>
+<%= form_with model: @product, data: {'turbo-confirm': "Are you sure?"}, method: :delete do |f| %>
+  <div class='submit' onclick="event.target.parentElement.requestSubmit()">
+    Delete
+  </div>
+<% end %>
