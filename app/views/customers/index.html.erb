@@ -11,7 +11,13 @@
       <tr>
         <td><%= link_to customer.name, customer %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-        <td><%= link_to 'Delete', customer, data: {confirm: 'Are you sure?'}, method: :delete %></td>
+        <td>
+          <%= form_with model: customer, data: {'turbo-confirm': "Are you sure?"}, method: :delete do |f| %>
+            <div class='submit' onclick="event.target.parentElement.requestSubmit()">
+              Delete
+            </div>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
