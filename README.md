@@ -4,7 +4,7 @@ This is a Rails 7 sample project for educational purposes.
 
 It is a simple project dealing with customers, products, orders and line items.
 
-_TODO_: Link to deployment
+This app is deployed publicly [here](https://customer-database-rails7.fly.dev/).
 
 ## Local (default) Setup
 
